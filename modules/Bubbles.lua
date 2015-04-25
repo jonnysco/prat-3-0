@@ -42,6 +42,8 @@ Prat:AddModuleToLoad(function()
     shorten_desc = "Shorten the chat bubbles down to a single line each. Mouse over the bubble to expand the text.",
     color_name = "Color Bubbles",
     color_desc = "Color the chat bubble border the same as the chat type.",
+    transparent_name = "Transparent Bubbles",
+    transparent_desc = "Hide background and border textures from chat bubbles. (/reload required to undo this option)",
     format_name = "Format Text",
     format_desc = "Apply Prat's formatting to the chat bubble text.",
     icons_name = "Show Raid Icons",
@@ -94,6 +96,7 @@ Prat:AddModuleToLoad(function()
       on = true,
       shorten = false,
       color = true,
+      transparent = true,
       format = true,
       icons = true,
       font = true,
@@ -114,6 +117,7 @@ Prat:AddModuleToLoad(function()
     args = {
       shorten = toggleOption,
       color = toggleOption,
+      transparent = toggleOption,
       format = toggleOption,
       icons = toggleOption,
       font = toggleOption,
@@ -156,12 +160,13 @@ Prat:AddModuleToLoad(function()
   function module:ApplyOptions()
     self.shorten = self.db.profile.shorten
     self.color = self.db.profile.color
+    self.transparent = self.db.profile.transparent
     self.format = self.db.profile.format
     self.icons = self.db.profile.icons
     self.font = self.db.profile.font
     self.fontsize = self.db.profile.fontsize
 
-    if self.shorten or self.color or self.format or self.icons or self.font then
+    if self.shorten or self.color or self.transparent or self.format or self.icons or self.font then
       self.update:Show()
     else
       self.update:Hide()
@@ -224,6 +229,11 @@ Prat:AddModuleToLoad(function()
       frame:SetBackdropBorderColor(fontstring:GetTextColor())
     end
 
+	if self.transparent then
+      -- Hide the border and background textures of the chat bubble
+      --FIXME: remove texture from bubble tail
+      frame:SetBackdrop(nil) -- remove texture from bubble (borders and background).
+    end
 
     if self.font then
       local a, b, c = fontstring:GetFont()
