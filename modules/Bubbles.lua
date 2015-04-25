@@ -41,9 +41,9 @@ Prat:AddModuleToLoad(function()
     shorten_name = "Shorten Bubbles",
     shorten_desc = "Shorten the chat bubbles down to a single line each. Mouse over the bubble to expand the text.",
     color_name = "Color Bubbles",
-    color_desc = "Color the chat bubble border the same as the chat type.",
     transparent_name = "Transparent Bubbles",
     transparent_desc = "Hide background and border textures from chat bubbles. (/reload required to undo this option)",
+    color_desc = "Color the chat bubble border the same as the chat type.",
     format_name = "Format Text",
     format_desc = "Apply Prat's formatting to the chat bubble text.",
     icons_name = "Show Raid Icons",
@@ -230,11 +230,11 @@ Prat:AddModuleToLoad(function()
     end
 
 	if self.transparent then
-      -- Hide the border and background textures of the chat bubble
-      --FIXME: remove texture from bubble tail
-      frame:SetBackdrop(nil) -- remove texture from bubble (borders and background).
-    end
-
+	  -- Hide the border and background textures of the chat bubble
+	  --FIXME: remove texture from bubble tail
+	  frame:SetBackdrop(nil) -- remove texture from bubble (borders and background).
+	end
+	  
     if self.font then
       local a, b, c = fontstring:GetFont()
 
