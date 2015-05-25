@@ -237,6 +237,9 @@ Prat:AddModuleToLoad(function()
 	  
     if self.font then
       local a, b, c = fontstring:GetFont()
+      if self.transparent then
+        c = "THICKOUTLINE" -- override font outline while bubble is transparent
+      end
 
       fontstring:SetFont(ChatFrame1:GetFont(), self.fontsize, c)
     end
